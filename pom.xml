@@ -9,8 +9,8 @@
     <description><!-- TODO: a brief description of your project --></description>
     <developers>
         <developer>
-            <name><!-- TODO: your full name --></name>
-            <email><!-- TODO: your email address --></email>
+            <name>Deák Eszter</name>
+            <email>deakeszter0308@gmail.com</email>
             <organization>Faculty of Informatics, University of Debrecen</organization>
             <organizationUrl>https://inf.unideb.hu/</organizationUrl>
         </developer>
@@ -115,7 +115,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>10.15.0</version>
+                        <version>10.16.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -172,5 +172,15 @@
             <id>github</id>
             <url>https://maven.pkg.github.com/INBPM0420L/homework-project-utils</url>
         </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
     </repositories>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/INBPM0420L/homework-project-2024-Esztinho</url>
+        </repository>
+    </distributionManagement>
 </project>
