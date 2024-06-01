@@ -1,91 +1,66 @@
-package state;
-import puzzle.State;
-import puzzle.solver.BreadthFirstSearch;
-import puzzle.solver.Node;
+package model;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.Arrays;
 
-public class GameState implements State<Integer>{
-    private final int[][] board;
+public class GameState {
+    private int[][] board;
     private int figureRow;
     private int figureCol;
-    private boolean nextMoveIsTwo;
+    private boolean nextMoveIsTwoSteps;
 
-    public GameState(int[][] board, int figureRow, int figureCol, boolean nextMoveIsTwo) {
-        this.board = board;
-        this.figureRow = figureRow;
-        this.figureCol = figureCol;
-        this.nextMoveIsTwo = nextMoveIsTwo;
-    }
-    @Override
-    public boolean isSolved() {
-        return figureRow == board.length - 1 && figureCol == board[0].length - 1;
+    public GameState(int[][] initialBoard, int startRow, int startCol, boolean startWithTwoSteps) {
+        this.board = Arrays.stream(initialBoard).map(int[]::clone).toArray(int[][]::new);
+        this.figureRow = startRow;
+        this.figureCol = startCol;
+        this.nextMoveIsTwoSteps = startWithTwoSteps;
     }
 
-    @Override
-    public boolean isLegalMove(Integer integer) {
-        int moveLength = integer;
-        return isValidMove(figureRow + moveLength, figureCol) ||
-                isValidMove(figureRow - moveLength, figureCol) ||
-                isValidMove(figureRow, figureCol + moveLength) ||
-                isValidMove(figureRow, figureCol - moveLength);
+    public int getFigureRow() {
+        return figureRow;
     }
 
-    @Override
-    public void makeMove(Integer integer) {
-        int moveLength = integer;
-        if (isValidMove(figureRow + moveLength, figureCol)) {
-            figureRow += moveLength;
-        } else if (isValidMove(figureRow - moveLength, figureCol)) {
-            figureRow -= moveLength;
-        } else if (isValidMove(figureRow, figureCol + moveLength)) {
-            figureCol += moveLength;
-        } else if (isValidMove(figureRow, figureCol - moveLength)) {
-            figureCol -= moveLength;
+    public int getFigureCol() {
+        return figureCol;
+    }
+
+    public void setFigureRow(int newRow) {
+        this.figureRow = newRow;
+    }
+
+    public void setFigureCol(int newCol) {
+        this.figureCol = newCol;
+    }
+
+    public int[][] getBoard() {
+        return board;
+    }
+
+    public boolean isNextMoveTwoSteps() {
+        return nextMoveIsTwoSteps;
+    }
+
+    public void toggleMoveLength() {
+        this.nextMoveIsTwoSteps = !this.nextMoveIsTwoSteps;
+    }
+
+    public boolean isValidMove(int newRow, int newCol) {
+        // Ellenőrzi, hogy a lépés érvényes-e
+        int moveLength = nextMoveIsTwoSteps ? 2 : 3;
+        if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8 && board[newRow][newCol] != -1) {
+            int rowDiff = Math.abs(newRow - figureRow);
+            int colDiff = Math.abs(newCol - figureCol);
+            return (rowDiff == moveLength && colDiff == 0) || (colDiff == moveLength && rowDiff == 0);
         }
+        return false;
+    }
 
-        // Check if the figure lands on a special cell
-        if (board[figureRow][figureCol] == 1) {
-            nextMoveIsTwo = !nextMoveIsTwo;
+    public void makeMove(int newRow, int newCol) {
+        if (isValidMove(newRow, newCol)) {
+            setFigureRow(newRow);
+            setFigureCol(newCol);
+            if (board[newRow][newCol] == 1) {
+                toggleMoveLength();
+            }
         }
-
     }
-
-
-    @Override
-    public Set getLegalMoves() {
-        Set<Integer> legalMoves = new HashSet<>();
-        int moveLength = nextMoveIsTwo ? 2 : 3;
-        if (isLegalMove(moveLength)) {
-            legalMoves.add(moveLength);
-        }
-        return legalMoves;
-    }
-
-    @Override
-    public State clone() {
-        return new GameState(board, figureRow, figureCol, nextMoveIsTwo);
-    }
-
-    private boolean isValidMove(int row, int col) {
-        return row >= 0 && row < board.length && col >= 0 && col < board[0].length && board[row][col] != -1;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(figureRow, figureCol, nextMoveIsTwo);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        GameState that = (GameState) obj;
-        return figureRow == that.figureRow && figureCol == that.figureCol && nextMoveIsTwo == that.nextMoveIsTwo;
-    }
-
-
 }
