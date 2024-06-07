@@ -1,5 +1,6 @@
 package model;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import puzzle.State;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -8,19 +9,35 @@ import java.util.Set;
 import java.util.StringJoiner;
 
 public class GameState implements State<Direction> {
-
+    private static final int[][] DEFAULT_BOARD = {
+            {0, 0, 0, 0, 1, 0, 0, 0},
+            {0, 0, 1, 0, 0, 0, 1, 0},
+            {0, 0, -1, 0, 0, 0, 0, -1},
+            {0, 0, 1, 0, 1, 0, 0, 0},
+            {1, -1, 0, 1, 0, 0, 0, 1},
+            {0, 0, 0, 1, 0, -1, 1, 0},
+            {0, 0, 1, 0, 0, 0, 0, 1},
+            {1, 0, 0, -1, 0, 0, 0, 0}
+    };
     public static final int BOARD_SIZE = 8;
     private int[][] board;
     private int figureRow;
     private int figureCol;
     private boolean nextMoveIsTwoSteps;
 
-    public GameState(int[][] initialBoard, int startRow, int startCol, boolean startWithTwoSteps) {
-        this.board = Arrays.stream(initialBoard).map(int[]::clone).toArray(int[][]::new);
-        this.figureRow = startRow;
-        this.figureCol = startCol;
-        this.nextMoveIsTwoSteps = startWithTwoSteps;
+
+    public GameState() {
+        this(DEFAULT_BOARD, 0, 0, true);
     }
+    public GameState(int[][] initialBoard, int row, int col, boolean nextMoveIsTwo) {
+        this.board = Arrays.stream(initialBoard).map(int[]::clone).toArray(int[][]::new);
+
+        this.figureRow = row;
+        this.figureCol = col;
+
+        this.nextMoveIsTwoSteps = nextMoveIsTwo;
+    }
+
 
     public int getFigureRow() {
         return figureRow;
@@ -126,9 +143,7 @@ public class GameState implements State<Direction> {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(figureRow, figureCol, nextMoveIsTwoSteps);
-        result = 31 * result + Arrays.deepHashCode(board);
-        return result;
+        return 0;
     }
 
     @Override
