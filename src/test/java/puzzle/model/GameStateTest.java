@@ -4,6 +4,8 @@ import model.Direction;
 import model.GameState;
 import org.junit.jupiter.api.Test;
 
+import java.util.EnumSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameStateTest {
@@ -138,6 +140,15 @@ class GameStateTest {
         state1.makeMove(Direction.UP);
         assertEquals(5, state1.getFigureRow());
         assertEquals(7, state1.getFigureCol());
+    }
+
+    @Test
+    void getLegalMoves() {
+        assertEquals(EnumSet.of(Direction.DOWN, Direction.RIGHT), state0.getLegalMoves());
+        assertEquals(EnumSet.of(Direction.UP, Direction.LEFT), state1.getLegalMoves());
+        assertEquals(EnumSet.of(Direction.UP, Direction.RIGHT), state2.getLegalMoves());
+        assertEquals(EnumSet.noneOf(Direction.class), state_3.getLegalMoves());
+
     }
 
 
