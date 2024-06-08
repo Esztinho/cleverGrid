@@ -2,6 +2,7 @@ package game;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -70,10 +71,19 @@ public class GameController {
             updateBoard();
             if (gameState.isSolved()) {
                 Logger.info("Puzzle solved!");
+                showSolvedAlert();
             }
         } else {
             Logger.warn("Invalid move:({}, {})", direction.getRowChange(), direction.getColChange());
         }
+    }
+
+    private void showSolvedAlert() {
+        var alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Game Over");
+        alert.setContentText("Congratulations, you have solved the puzzle!");
+        alert.showAndWait();
+        restartGame();
     }
 
     private void clearAndPopulateGrid() {
