@@ -66,6 +66,25 @@ public class GameController {
         }
     }
 
+    private void clearAndPopulateGrid() {
+        grid.getChildren().clear();
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                var square = createSquare(row, col);
+                grid.add(square, col, row);
+            }
+        }
+        updateBoard();
+    }
+
+
+    private StackPane createSquare(int row, int col) {
+        var square = new StackPane();
+        square.getStyleClass().add("square");
+        return square;
+    }
+
+
     private void updateBoard() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
