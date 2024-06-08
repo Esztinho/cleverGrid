@@ -76,4 +76,37 @@ class GameStateTest {
         assertFalse(state_3.isSolved());
     }
 
+    @Test
+    void isLegalMove_state0() {
+        assertFalse(state0.isLegalMove(Direction.UP));
+        assertTrue(state0.isLegalMove(Direction.RIGHT));
+        assertTrue(state0.isLegalMove(Direction.DOWN));
+        assertFalse(state0.isLegalMove(Direction.LEFT));
+    }
+
+    @Test
+    void isLegalMove_state1() {
+        assertTrue(state1.isLegalMove(Direction.UP));
+        assertFalse(state1.isLegalMove(Direction.RIGHT));
+        assertFalse(state1.isLegalMove(Direction.DOWN));
+        assertTrue(state1.isLegalMove(Direction.LEFT));
+    }
+
+    @Test
+    void isLegalMove_state2() {
+        assertTrue(state2.isLegalMove(Direction.UP));
+        assertTrue(state2.isLegalMove(Direction.RIGHT));
+        assertFalse(state2.isLegalMove(Direction.DOWN));
+        assertFalse(state2.isLegalMove(Direction.LEFT));
+    }
+
+    @Test
+    void isLegalMove_state3() {
+        assertFalse(state_3.isLegalMove(Direction.UP));
+        assertFalse(state_3.isLegalMove(Direction.RIGHT));
+        assertFalse(state_3.isLegalMove(Direction.DOWN));
+        assertFalse(state_3.isLegalMove(Direction.LEFT));
+    }
+
+
 }
