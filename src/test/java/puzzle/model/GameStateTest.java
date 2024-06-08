@@ -1,5 +1,6 @@
 package puzzle.model;
 
+import model.Direction;
 import model.GameState;
 import org.junit.jupiter.api.Test;
 
@@ -32,11 +33,18 @@ class GameStateTest {
     };;
     GameState state2 = new GameState(initialBoard2, 5, 0, false);
 
-    int[][] initialBoard_3 = { {0, 0, -1}, {-1, 0, 0}, {1, 1, 0} };
-    GameState state_3 = new GameState(initialBoard_3, 1, 1, false);
+    int[][] initialBoard_3 = {
+            {0, 0, 1, -1, 1, 0, 0, 0},
+            {0, 0, 1, 0, 0, 0, 1, 0},
+            {0, 0, -1, 0, 0, 0, 0, -1},
+            {0, 0, 1, 0, 1, 0, -1, 0},
+            {1, -1, 0, 1, 0, 0, -1, 1},
+            {0, 0, 0, 1, 0, -1, -1, 0},
+            {0, 0, 1, -1, -1, 0, 0, 1},
+            {1, 0, 0, -1, 0, -1, 0, 0}
+    };
+    GameState state_3 = new GameState(initialBoard_3, 6, 6, false);  //no legal moves
 
-    int[][] initialBoard_4 = { {0, 0, -1}, {-1, 0, 0}, {1, 1, 0} };
-    GameState state_4 = new GameState(initialBoard_4, 1, 1, false);
 
     @Test
     void constructor(){
@@ -66,8 +74,6 @@ class GameStateTest {
         assertTrue(state1.isSolved());
         assertFalse(state2.isSolved());
         assertFalse(state_3.isSolved());
-        assertFalse(state_4.isSolved());
-
     }
 
 }
