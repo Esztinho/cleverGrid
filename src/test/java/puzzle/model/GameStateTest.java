@@ -151,5 +151,18 @@ class GameStateTest {
 
     }
 
+    @Test
+    void testEquals() {
+        assertTrue(state1.equals(state1));
+
+        var clone = state1.clone();
+        clone.makeMove(Direction.RIGHT);
+        assertFalse(clone.equals(state0));
+
+        assertFalse(state1.equals(null));
+        assertFalse(state1.equals("Hello, World!"));
+        assertFalse(state1.equals(state2));
+    }
+
 
 }
