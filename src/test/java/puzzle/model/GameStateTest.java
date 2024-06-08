@@ -108,5 +108,37 @@ class GameStateTest {
         assertFalse(state_3.isLegalMove(Direction.LEFT));
     }
 
+    @Test
+    void makeMove_down_state0() {
+        var stateBeforeMove = state0.clone();
+        state0.makeMove(Direction.DOWN);
+        assertEquals(2, state0.getFigureRow());
+        assertEquals(0, state0.getFigureCol());
+    }
+
+    @Test
+    void makeMove_right_state0() {
+        var stateBeforeMove = state0.clone();
+        state0.makeMove(Direction.RIGHT);
+        assertEquals(0, state0.getFigureRow());
+        assertEquals(2, state0.getFigureCol());
+    }
+
+    @Test
+    void makeMove_left_state1() {
+        var stateBeforeMove = state1.clone();
+        state1.makeMove(Direction.LEFT);
+        assertEquals(7, state1.getFigureRow());
+        assertEquals(5, state1.getFigureCol());
+    }
+
+    @Test
+    void makeMove_up_state1() {
+        var stateBeforeMove = state1.clone();
+        state1.makeMove(Direction.UP);
+        assertEquals(5, state1.getFigureRow());
+        assertEquals(7, state1.getFigureCol());
+    }
+
 
 }
