@@ -30,12 +30,26 @@ public class GameState implements State<Direction> {
         this(DEFAULT_BOARD, 0, 0, true);
     }
     public GameState(int[][] initialBoard, int row, int col, boolean nextMoveIsTwo) {
+        checkParameters(initialBoard, row, col);
         this.board = Arrays.stream(initialBoard).map(int[]::clone).toArray(int[][]::new);
 
         this.figureRow = row;
         this.figureCol = col;
 
         this.nextMoveIsTwoSteps = nextMoveIsTwo;
+    }
+
+    private void checkParameters(int[][] initialBoard, int row, int col) {
+        for (int[] rowArray : initialBoard) {
+            for (int cell : rowArray) {
+                if (cell != -1 && cell != 0 && cell != 1) {
+                    throw new IllegalArgumentException("Invalid cell value");
+                }
+            }
+        }
+        if (row < 0 || row >= 8 || col < 0 || col >= 8) {
+            throw new IllegalArgumentException("Invalid initial figure position");
+        }
     }
 
 
