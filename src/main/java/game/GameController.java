@@ -33,7 +33,22 @@ public class GameController {
         int c=(gameState.getFigureCol());
         int r=(gameState.getFigureRow());
         clearAndPopulateGrid();
+        placeFigureAt(c, r);
         gameFinished=false;
+    }
+
+    private void placeFigureAt(int row, int col) {
+        var node = grid.getChildren().get(row * 8 + col);
+        if (node instanceof StackPane) {
+            StackPane square = (StackPane) node;
+            square.getChildren().clear();
+            if (gameState.getFigureRow() == row && gameState.getFigureCol() == col) {
+                var imageView = new ImageView(new Image("puzzlegame/npc.png"));
+                imageView.setFitWidth(57.6);
+                imageView.setFitHeight(57.6);
+                imageView.setPreserveRatio(true);
+                square.getChildren().add(imageView);}
+        }
     }
 
     @FXML
