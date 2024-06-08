@@ -23,6 +23,16 @@ public class GameController {
     private void initialize() {
         // Késleltetett eseménykezelő beállítása
         Platform.runLater(() -> grid.getScene().setOnKeyPressed(this::handleKeyPress));
+
+        restartGame();
+    }
+
+    private void restartGame() {
+        gameState = new GameState();
+        int c=(gameState.getFigureCol());
+        int r=(gameState.getFigureRow());
+        clearAndPopulateGrid();
+        gameFinished=false;
     }
 
     @FXML
