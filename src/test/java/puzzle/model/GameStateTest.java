@@ -164,5 +164,18 @@ class GameStateTest {
         assertFalse(state1.equals(state2));
     }
 
+    @Test
+    void testHashCode() {
+        assertTrue(state0.hashCode() == state0.hashCode());
+        assertTrue(state0.hashCode() == state0.clone().hashCode());
+    }
+
+    @Test
+    void testClone() {
+        var clone = state0.clone();
+        assertTrue(clone.equals(state0));
+        assertNotSame(clone, state0);
+    }
+
 
 }
