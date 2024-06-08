@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import model.Direction;
@@ -15,6 +16,40 @@ public class GameController {
     private GridPane grid;
 
     private GameState gameState;
+
+    private Boolean gameFinished;
+
+    @FXML
+    private void initialize() {
+        // Késleltetett eseménykezelő beállítása
+        Platform.runLater(() -> grid.getScene().setOnKeyPressed(this::handleKeyPress));
+    }
+
+    @FXML
+    private void handleKeyPress(KeyEvent keyEvent) {
+        if (gameFinished) {
+            return; // Do nothing if the game is finished
+        }
+        switch (keyEvent.getCode()) {
+            case UP:
+                moveFigure(Direction.UP);
+                break;
+            case RIGHT:
+                moveFigure(Direction.RIGHT);
+                break;
+            case DOWN:
+                moveFigure(Direction.DOWN);
+                break;
+            case LEFT:
+                moveFigure(Direction.LEFT);
+                break;
+            default:
+                break;
+        }
+        if (gameState.isSolved()) {
+            gameFinished=true;
+        }
+    }
 
 
     private void moveFigure(Direction direction) {
