@@ -8,11 +8,35 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameStateTest {
     GameState state0 = new GameState();
 
-    int[][] initialBoard1 = { {0, 0, 0}, {0, 1, 0}, {0, 0, 0} };
-    GameState state1 = new GameState(initialBoard1, 0, 0, true);
+    int[][] initialBoard1 = {
+            {0, 0, 0, 0, 1, 0, 0, 0},
+            {0, 0, 1, 0, 0, 0, 1, 0},
+            {0, 0, -1, 0, 0, 0, 0, -1},
+            {0, 0, 1, 0, 1, 0, 0, 0},
+            {1, -1, 0, 1, 0, 0, 0, 1},
+            {0, 0, 0, 1, 0, -1, 1, 0},
+            {0, 0, 1, 0, 0, 0, 0, 1},
+            {1, 0, 0, -1, 0, 0, 0, 0}
+    };;
+    GameState state1 = new GameState(initialBoard1, 7, 7, true);  // a goal state
 
-    int[][] initialBoard2 = { {0, 0, -1}, {-1, 0, 0}, {1, 1, 0} };
-    GameState state2 = new GameState(initialBoard2, 1, 1, false);
+    int[][] initialBoard2 = {
+            {0, 0, 1, -1, 1, 0, 0, 0},
+            {0, 0, 1, 0, 0, 0, 1, 0},
+            {0, 0, -1, 0, 0, 0, 0, -1},
+            {0, 0, 1, 0, 1, 0, 0, 0},
+            {1, -1, 0, 1, 0, 0, 0, 1},
+            {0, 0, 0, 1, 0, -1, -1, 0},
+            {0, 0, 1, 0, 0, 0, 1, 1},
+            {1, 0, 0, -1, 0, -1, 0, 0}
+    };;
+    GameState state2 = new GameState(initialBoard2, 5, 0, false);
+
+    int[][] initialBoard_3 = { {0, 0, -1}, {-1, 0, 0}, {1, 1, 0} };
+    GameState state_3 = new GameState(initialBoard_3, 1, 1, false);
+
+    int[][] initialBoard_4 = { {0, 0, -1}, {-1, 0, 0}, {1, 1, 0} };
+    GameState state_4 = new GameState(initialBoard_4, 1, 1, false);
 
     @Test
     void constructor(){
@@ -33,7 +57,17 @@ class GameStateTest {
 
         int[][] initialBoard5 = { {-5, 1, -1}, {0, 0, 0}, {1, 1, 0} };
         assertThrows(IllegalArgumentException.class, () -> new GameState(initialBoard5, -1, 20, false));
-        
+
+    }
+
+    @Test
+    void isSolved() {
+        assertFalse(state0.isSolved());
+        assertTrue(state1.isSolved());
+        assertFalse(state2.isSolved());
+        assertFalse(state_3.isSolved());
+        assertFalse(state_4.isSolved());
+
     }
 
 }
