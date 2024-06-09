@@ -17,3 +17,16 @@ During movement, the number of squares traversed by the figure alternates betwee
 This change occurs when the figure lands on a circled square.
 
 The figure cannot move onto dark squares.
+
+## Solution
+
+###  1. DOWN
+###  2. DOWN
+###  3. UP
+###  4. RIGHT
+###  5. DOWN
+###  6. RIGHT
+###  7. RIGHT
+###  8. DOWN
+
+
