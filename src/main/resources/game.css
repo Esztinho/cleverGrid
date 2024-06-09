@@ -1,0 +1,16 @@
+.square {
+    -fx-border-color: black;
+
+}
+
+.square.black {
+    -fx-background-color: black;
+}
+
+
+.square.spec {
+    -fx-background-color: gray;
+    -fx-background-radius: 9em;
+    -fx-border-color:white;
+}
+
