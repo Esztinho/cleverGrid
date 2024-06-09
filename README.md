@@ -18,6 +18,8 @@ This change occurs when the figure lands on a circled square.
 
 The figure cannot move onto dark squares.
 
+![](/assets/puzzlegame.png)
+
 ## Solution
 
 ###  1. DOWN
