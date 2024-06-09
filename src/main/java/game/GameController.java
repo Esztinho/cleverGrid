@@ -134,9 +134,9 @@ public class GameController {
                         imageView.setPreserveRatio(true);
                         square.getChildren().add(imageView);
                     } else if (gameState.getBoard()[row][col] == -1) {
-                        square.setStyle("-fx-background-color: black;"); // Fekete mezők
+                        square.getStyleClass().add("black");
                     } else if (gameState.getBoard()[row][col] == 1) {
-                        square.setStyle("-fx-background-color: gray;");
+                        square.getStyleClass().add("spec");
                     } else {
                         square.setStyle("");
                     }
