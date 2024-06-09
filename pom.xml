@@ -6,7 +6,7 @@
     <artifactId>homework-project-2024-Esztinho</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <description>Homework project</description>
+    <description>A projekt egy logikai játékot valósít meg egy 8x8-as táblán, ahol a cél a figurának eljutni egyik sarokból a másikba.</description>
     <developers>
         <developer>
             <name>Deák Eszter</name>
