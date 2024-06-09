@@ -8,6 +8,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
 
+/**
+ * Represents the state of the game.
+ */
 public class GameState implements State<Direction> {
     private static final int[][] DEFAULT_BOARD = {
             {0, 0, 0, 0, 1, 0, 0, 0},
@@ -19,13 +22,20 @@ public class GameState implements State<Direction> {
             {0, 0, 1, 0, 0, 0, 0, 1},
             {1, 0, 0, -1, 0, 0, 0, 0}
     };
+
+    /**
+     * The size of the board.
+     */
     public static final int BOARD_SIZE = 8;
     private int[][] board;
     private int figureRow;
     private int figureCol;
     private boolean nextMoveIsTwoSteps;
 
-
+    /**
+     * Creates a {@code GameState} object that corresponds to the original
+     * initial state of the game.
+     */
     public GameState() {
         this(DEFAULT_BOARD, 0, 0, true);
     }
@@ -81,6 +91,9 @@ public class GameState implements State<Direction> {
         this.nextMoveIsTwoSteps = !this.nextMoveIsTwoSteps;
     }
 
+    /**
+     * {@return whether the puzzle is solved}
+     */
     @Override
     public boolean isSolved() {
         int goalRow = 7;
@@ -88,6 +101,12 @@ public class GameState implements State<Direction> {
         return figureRow == goalRow && figureCol == goalCol;
     }
 
+    /**
+     * Checks if moving the figure in the specified direction is legal
+     *
+     * @param direction a direction in which the figure is to be moved
+     * @return true if the move is legal, false otherwise
+     */
     @Override
     public boolean isLegalMove(Direction direction) {
         int moveLength = nextMoveIsTwoSteps ? 2 : 3;
@@ -110,6 +129,11 @@ public class GameState implements State<Direction> {
         return false;
     }
 
+    /**
+     * Moves the figure in the specified direction if the move is legal
+     *
+     * @param direction a direction in which the figure is to be moved
+     */
     @Override
     public void makeMove(Direction direction) {
         if (isLegalMove(direction)) {
@@ -127,6 +151,9 @@ public class GameState implements State<Direction> {
         }
     }
 
+    /**
+     * {@return the set of directions to which the player can be moved}
+     */
     @Override
     public Set<Direction> getLegalMoves() {
         Set<Direction> legalMoves = new HashSet<>();
