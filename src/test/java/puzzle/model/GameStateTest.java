@@ -177,5 +177,29 @@ class GameStateTest {
         assertNotSame(clone, state0);
     }
 
+    @Test
+    void testToString() {
+        assertEquals("GameState{" +
+                "figureRow=" + "0" +
+                ", figureCol=" + "0" +
+                ", nextMoveIsTwoSteps=" + "true" +
+                '}', state0.toString());
+        assertEquals("GameState{" +
+                "figureRow=" + "7" +
+                ", figureCol=" + "7" +
+                ", nextMoveIsTwoSteps=" + "true" +
+                '}', state1.toString());
+        assertEquals("GameState{" +
+                "figureRow=" + "5" +
+                ", figureCol=" + "0" +
+                ", nextMoveIsTwoSteps=" + "false" +
+                '}', state2.toString());
+        assertEquals("GameState{" +
+                "figureRow=" + "6" +
+                ", figureCol=" + "6" +
+                ", nextMoveIsTwoSteps=" + "false" +
+                '}', state_3.toString());
+    }
+
 
 }
